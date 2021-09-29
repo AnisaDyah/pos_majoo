@@ -70,22 +70,22 @@ if($this->session->privilege != 'Administrator')
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li><a href="<?php echo base_url() ?>admin"><i class="fa fa-home"></i> Home </a></li>
-                  <li><a><i class="fa fa-edit"></i> User <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-user"></i> User <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url('pengguna/create')?>">Input User</a></li>
-                      <li><a href="<?php echo base_url('pengguna/')?>">List User</a></li>
+                      <li><a href="<?php echo base_url('Pengguna/create')?>">Input User</a></li>
+                      <li><a href="<?php echo base_url('Pengguna/')?>">List User</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Kategori <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-tags"></i> Kategori <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url('kategori/create')?>">Input Kategori</a></li>
-                      <li><a href="<?php echo base_url('kategori/')?>">List Kategori</a></li>
+                      <li><a href="<?php echo base_url('Kategori/create')?>">Input Kategori</a></li>
+                      <li><a href="<?php echo base_url('Kategori/')?>">List Kategori</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Produk <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-dropbox"></i> Produk <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url('produk/create')?>">Input Produk</a></li>
-                      <li><a href="<?php echo base_url('produk/')?>">List Produk</a></li>
+                      <li><a href="<?php echo base_url('Produk/create')?>">Input Produk</a></li>
+                      <li><a href="<?php echo base_url('Produk/')?>">List Produk</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -93,24 +93,7 @@ if($this->session->privilege != 'Administrator')
               
 
             </div>
-            <!-- /sidebar menu -->
-
-            <!-- /menu footer buttons -->
-            <!-- <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php base_url('Login/logout')?>">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div> -->
-            <!-- /menu footer buttons -->
+            
           </div>
         </div>
 

@@ -159,14 +159,16 @@
                     </li>
 
                     <li class="dropdown yamm-fw">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Produk <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Kategori <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <div class="yamm-content">
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <ul>
-                                                <li><a href="home/#produk">ALL</a></li>
+                                            <?php foreach ($kategori as $data => $value) { ?>
+                                                <li><a href="<?php echo base_url('Home/kategori/'.$value->id_kategori) ?>"><?php echo $value->nama_kategori ?></a></li>
+                                            <?php } ?>
                                             </ul>
                                         </div>
                                     </div>

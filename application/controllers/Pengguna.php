@@ -21,49 +21,54 @@
         public function index()
         {
             $data['list'] = $this->Pengguna_model->list_user();
-            $this->load->view('pengguna/index', $data);
+            $this->load->view('Pengguna/index', $data);
         }
         
         public function create()
         {
-            $this->load->view('pengguna/create');
+            $this->load->view('Pengguna/create');
         }
 
         public function store()
         {
+            $this->form_validation->set_rules('username', "username", "required|alpha_numeric|min_length[4]");
+            $this->form_validation->set_rules('notelp', "No Telp", "required");
+            $this->form_validation->set_rules('alamat', "Alamat", "required");
+            $this->form_validation->set_rules('nama', "Nama Lengkap", "required");
+            $this->form_validation->set_rules('password', "password", "min_length[4]");
+            $this->form_validation->set_rules('email', "E-mail", "trim|required|valid_email");
+
             if($this->session->privilege=="Administrator")
             {
-                $data = [
-                    'nama' => $this->input->post('nama'),
-                    'alamat' => $this->input->post('alamat'),
-                    'email' => $this->input->post('email'),
-                    'notelp' => $this->input->post('notelp'),
-                    'username' => $this->input->post('username'),
-                    'password' => md5($this->input->post('password')),
-                    'privilege' => $this->input->post('privilege')
-                ];
-                $rules = [
-                    [
-                    'field' => 'nama',
-                    'label' => 'nama',
-                    'rules' => 'trim|required'
-                    ]
-                ];
-                
-                $this->form_validation->set_rules($rules);
-    
-                if ($this->form_validation->run()) {
-                    $result = $this->Pengguna_model->insert($data);
-                    if ($result) {
-                        redirect('pengguna');
-                    }
-                } else {
-                    redirect('pengguna/create');
-                }
-            }
+                $this->form_validation->set_rules('privilege', "Privilege", "required");
 
-            else
-            {
+                if ($this->form_validation->run() == true) {
+                        $data = [
+                            'nama' => $this->input->post('nama'),
+                            'alamat' => $this->input->post('alamat'),
+                            'email' => $this->input->post('email'),
+                            'notelp' => $this->input->post('notelp'),
+                            'username' => $this->input->post('username'),
+                            'password' => md5($this->input->post('password')),
+                            'privilege' => $this->input->post('privilege')
+                        ];
+
+                            $result = $this->Pengguna_model->insert($data);
+                            if ($result) {
+                                 $this->session->set_flashdata("success_message", "Data Berhasil di Tambahkan");
+                                 redirect('Pengguna');
+                            }else{
+                                $this->session->set_flashdata("error", "Data Gagal di Tambahkan");
+                                redirect('Pengguna/create');
+
+                            }
+                    }else{
+                        $this->session->set_flashdata('error', validation_errors());
+                        redirect('Pengguna/create');
+                    }
+                    
+            }else{
+                if ($this->form_validation->run() == true) {
                 $data = [
                     'nama' => $this->input->post('nama'),
                     'alamat' => $this->input->post('alamat'),
@@ -73,26 +78,23 @@
                     'password' => md5($this->input->post('password')),
                     'privilege' => 'User'
                 ];
-                $rules = [
-                    [
-                    'field' => 'nama',
-                    'label' => 'nama',
-                    'rules' => 'trim|required'
-                    ]
-                ];
                 
-                $this->form_validation->set_rules($rules);
-    
-                if ($this->form_validation->run()) {
                     $result = $this->Pengguna_model->insert($data);
              
                     if ($result) {
-                        redirect('home');
+                        $this->session->set_flashdata("success_message", "Berhasil Registrasi, Silahkan Login");
+                        redirect('Home/register'); 
+                    }else{
+                        $this->session->set_flashdata("error", "Gagal Registrasi");
+                        redirect('Home/register');
+    
                     }
-                } else {
-                    redirect('home/register');
-                }
+               
+            }else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('Home/register');
             }
+          }
 
         }
 
@@ -102,7 +104,7 @@
             $data = [
                 'data' => $pengguna
             ];
-            $this->load->view('pengguna/show', $data);
+            $this->load->view('Pengguna/show', $data);
         }
 
         public function edit($id)
@@ -111,13 +113,22 @@
             $data = [
                 'pengguna' => $pengguna
             ];
-            $this->load->view('pengguna/edit', $data);
+            $this->load->view('Pengguna/edit', $data);
         }
     
         public function update($id)
         {
             // TODO: implementasi update data berdasarkan $id
+            $this->form_validation->set_rules('username', "username", "required|alpha_numeric|min_length[4]");
+            $this->form_validation->set_rules('notelp', "No Telp", "required");
+            $this->form_validation->set_rules('alamat', "Alamat", "required");
+            $this->form_validation->set_rules('nama', "Nama Lengkap", "required");
+            $this->form_validation->set_rules('password', "password", "min_length[4]");
+            $this->form_validation->set_rules('email', "E-mail", "trim|required|valid_email");
+            $this->form_validation->set_rules('privilege', "Privilege", "required");
+
             $id = $this->input->post('id');
+            if ($this->form_validation->run() == true) {
             $data = array(
                 'nama' => $this->input->post('nama'), 
                 'alamat' => $this->input->post('alamat'),
@@ -128,14 +139,31 @@
                 'privilege' => $this->input->post('privilege')
             );
 
-            $this->Pengguna_model->update($id, $data);
-            redirect('pengguna');
+                $result=$this->Pengguna_model->update($id, $data);
+                if (!$result) {
+                    $this->session->set_flashdata("success_message", "Data Berhasil di Perbaharui");
+                    redirect('Pengguna');
+               }else{
+                   $this->session->set_flashdata("error", "Data Gagal di Perbaharui");
+                   redirect('Pengguna/edit/'.$id);
+
+               }
+            }else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('Pengguna/edit/'.$id);
+            }
         }
     
         public function destroy($id)
         {
-            $this->Pengguna_model->delete($id);
-            redirect('pengguna');
+            $result=$this->Pengguna_model->delete($id);
+            if(!$result)
+            {
+                $this->session->set_flashdata("success_message", "Data Berhasil di Hapus");
+            }else{
+                $this->session->set_flashdata("error", "Data Gagal di Hapus");
+            }
+            redirect('Pengguna');
         }
     
     }

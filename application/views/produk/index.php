@@ -51,8 +51,8 @@
                           <th width="5%" class="text-center">Stok</th>
                           <th width="10%" class="text-center">Harga</th>
                           <th width="10%" class="text-center">
-                          <a class="btn btn-primary" href="<?php echo base_url('produk/create') ?>">
-                            Tambah
+                          <!-- <a class="btn btn-primary" href="<?php echo base_url('produk/create') ?>"> -->
+                          Action
                           </a>
                           </th>
                           

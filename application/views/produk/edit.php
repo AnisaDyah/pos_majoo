@@ -21,7 +21,9 @@
             value="<?php echo $data->nama_produk ?>">
           </div>
           <div class="form-group">
-              <label for="">Gambar</label>
+              <label for="">Gambar</label><br>
+              <a href ="<?php echo base_url('assets/image/'.$data->gambar)?>"><img src="<?php echo base_url('assets/image/'.$data->gambar)?>" width="200" height="200" style="background-color:white; margin-bottom:20px"></a>
+              <label for=""><?php echo $data->gambar ?></label><br>
               <input type="file" class="form-control" id="gambar" name="gambar" size="20">
             </div>
           <div class="form-group">

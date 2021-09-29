@@ -12,7 +12,7 @@ class Login extends CI_Controller {
     }
     public function index()
     {
-        $this->load->view('sippko/index');
+        $this->load->view('majoo/index2');
     }
 
     public function login()
@@ -34,27 +34,27 @@ class Login extends CI_Controller {
             if($this->Login_model->login($username, $passwordx))
             {
                 if($this->session->privilege=="Administrator")
-                { redirect('admin/index'); 
+                { redirect('Admin/index'); 
                 }
                 else
-                { redirect('home'); 
+                { redirect('Home'); 
                 }
             }
             else
             {
-               redirect('home');
+               redirect('Home');
             }
         }
         else
         {
-            redirect('home');
+            redirect('Home');
         }
     }
 
     public function logout()
     { 
         $this->session->sess_destroy();
-        redirect('home');
+        redirect('Home');
     }
 }
 

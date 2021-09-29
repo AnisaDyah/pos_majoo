@@ -21,23 +21,11 @@
             </div>
             <div class="form-group">
               <label for="gambar">Gambar</label>
-              <!-- <form method="post" action="" id="upload_file">
-              <input type="file"  class="form-control" name="userfile" id="userfile" size="20" />
-
-              <input class="btn btn-success" type="submit" name="submit" id="submit" />
-            </form>
-            <div class="row align-items-center">
-              <div class="col">
-                <div class="progress">
-                  <div id="file-progress-bar" class="progress-bar"></div>
-              </div>
-            </div>
-            </div> -->
               <input type="file" class="form-control" id="gambar" name="gambar" size="20" require>
             </div>
             <div class="form-group">
             <label> Kategori </label>
-            <select id='itemName' class="form-control" name ="kategori">
+            <select id='itemName' class="form-control" name ="kategori" style="width: 100% !important;">
                 <option value='0'>-- Pilih Kategori --</option>
             </select>
             </div>

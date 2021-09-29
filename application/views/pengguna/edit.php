@@ -6,6 +6,13 @@
       <br/><br/><br/>
       <legend>Edit User</legend>
       <div class="col-xs-12 col-sm-12 col-md-12">
+      <?php $error = $this->session->flashdata('error');
+      if ($error) { ?>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <?php echo $error; ?>
+        </div>
+      <?php } ?>
       <?php echo form_open('pengguna/update/'.$pengguna->id); ?>
         <?php echo form_hidden('id', $pengguna->id) ?>
         <div class="form-group">
@@ -30,7 +37,7 @@
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="text" class="form-control" id="password" name="password" placeholder="Masukkan Password" value="<?php echo $pengguna->password ?>">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" value="<?php echo $pengguna->password ?>">
         </div>
         <div class="form-group">
           <label> Privilege </label>

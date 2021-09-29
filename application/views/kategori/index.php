@@ -11,7 +11,18 @@
             <div class="clearfix"></div>
 
             <div class="row">
-              
+            <?php if ($this->session->flashdata('success_message') != null) : ?>
+              <div class="alert alert-success" role="alert">
+                <?php echo $this->session->flashdata('success_message'); ?>
+              </div>
+            <?php endif ?>
+            <?php $error = $this->session->flashdata('error');
+							if ($error) { ?>
+								<div class="alert alert-danger alert-dismissable">
+									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+									<?php echo $error; ?>
+								</div>
+							<?php } ?>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -22,11 +33,11 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          
-                          <th width="50%">Nama</th>
-                          <th width="50%">
-                          <a class="btn btn-primary" href="<?php echo base_url('kategori/create') ?>">
-                            Tambah
+                        <th width="1%">No.</th>
+                          <th width="50%" class="text-center">Nama</th>
+                          <th width="20%" class="text-center">
+                          <!-- <a class="btn btn-primary" href="<?php echo base_url('Kategori/create') ?>"> -->
+                          Action
                           </a>
                           </th>
                          
@@ -36,11 +47,12 @@
                       <tbody>
                       <?php foreach ($list as $data => $value) { ?>
                         <tr>
-                          <td><a href="<?php echo base_url('kategori/show/'.$value->id_kategori) ?>">
+                          <td class="text-center"><?php echo ++$data; ?></td>
+                          <td>
                               <?php echo $value->nama_kategori ?>
                           </td>
-                          <td><?php echo form_open('kategori/destroy/'.$value->id_kategori)  ?>
-                              <a class="btn btn-info" href="<?php echo base_url('kategori/edit/'.$value->id_kategori) ?>">
+                          <td class="text-center"><?php echo form_open('Kategori/destroy/'.$value->id_kategori)  ?>
+                              <a class="btn btn-info" href="<?php echo base_url('Kategori/edit/'.$value->id_kategori) ?>">
                                 Ubah
                               </a>
                               <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</button>

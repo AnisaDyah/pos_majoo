@@ -22,7 +22,18 @@
                         <p class="lead">Not our registered customer yet?</p>
                         
                         <hr>
-
+                        <?php if ($this->session->flashdata('success_message') != null) : ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $this->session->flashdata('success_message'); ?>
+                        </div>
+                        <?php endif ?>
+                        <?php $error = $this->session->flashdata('error');
+                        if ($error) { ?>
+                            <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <?php echo $error; ?>
+                            </div>
+                        <?php } ?>
                         <?php echo form_open('pengguna/store'); ?>
                             <div class="form-group">
                                 <label for="nama">Nama</label>

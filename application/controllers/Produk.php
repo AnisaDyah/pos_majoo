@@ -154,49 +154,6 @@ class Produk extends CI_Controller {
 
     }
 
-    public function upload_file()
-    {
-	$status = "";
-	$msg = "";
-	$file_element_name = 'userfile';
-	
-	if ($status != "error")
-	{
-		$config['upload_path']      = './assets/image/';
-        $config['allowed_types']    = 'gif|jpg|png';
-        $config['max_size']         = 15000;
-        $config['max_width']        = 13660;
-        $config['max_height']       = 7680;
-
-		$this->load->library('upload', $config);
-
-		if (!$this->upload->do_upload($file_element_name))
-		{
-			$status = 'error';
-			$msg = $this->upload->display_errors('', '');
-		}
-		else
-		{
-			$data = $this->upload->data();
-            $url = $data['file_name'];
-            if($data)
-			{
-				$status = "success";
-				$msg = "File successfully uploaded";
-			}
-			else
-			{
-				//unlink($data['full_path']);
-				$status = "error";
-				$msg = "Something went wrong when saving the file, please try again.";
-			}
-			//return $url;
-		}
-		//unlink($_FILES[$file_element_name]);
-	}
-	echo json_encode(array('status' => $status, 'msg' => $msg));
-    }
-
     public function show($id_produk)
     {
         $produk = $this->Produk_model->show($id_produk);
@@ -219,7 +176,7 @@ class Produk extends CI_Controller {
     {
         // TODO: implementasi update data berdasarkan $id
         $id_produk = $this->input->post('id_produk');
-        $this->form_validation->set_rules('nama_produk', "Nama Produk", "required|is_unique[produk.nama_produk]");
+        $this->form_validation->set_rules('nama_produk', "Nama Produk", "required");
 		$this->form_validation->set_rules('kategori', "Kategori", "required");
 		$this->form_validation->set_rules('deskripsi', "Deskripsi", "required");
         $this->form_validation->set_rules('harga', "Harga", "required|integer");

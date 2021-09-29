@@ -8,122 +8,51 @@
             parent::__construct();
             $this->load->helper('url');
             $this->load->model('Produk_model');
+            $this->load->model('Kategori_model');
         }
 
         public function index()
         {
+            $data['kategori'] =$this->Produk_model->get_kategori();
             $data['list'] = $this->Produk_model->list_product();
-            $this->load->view('sippko/index2', $data);
-        }
-
-        // public function etical()
-        // {
-        //     $data['getEtical'] = $this->Produk_model->getEtical();
-        //     $this->load->view('sippko/etical', $data);
-        // }
-
-        // public function generic()
-        // {
-        //     $data['getGeneric'] = $this->Produk_model->getGeneric();
-        //     $this->load->view('sippko/generic', $data);
-        // }
-
-        // public function lainnya()
-        // {
-        //     $data['getLainnya'] = $this->Produk_model->getLainnya();
-        //     $this->load->view('sippko/lainnya', $data);
-        // }
-
-        public function bag()
-        {
-            $data['getBag'] = $this->Produk_model->getBag();
-            $this->load->view('sippko/bag', $data);
-        }
-
-        public function straw()
-        {
-            $data['getStraw'] = $this->Produk_model->getStraw();
-            $this->load->view('sippko/straw', $data);
-        }
-
-        public function container()
-        {
-            $data['getContainer'] = $this->Produk_model->getContainer();
-            $this->load->view('sippko/container', $data);
-        }
-
-        public function poncho()
-        {
-            $data['getPoncho'] = $this->Produk_model->getPoncho();
-            $this->load->view('sippko/poncho', $data);
-        }
-
-        public function pla()
-        {
-            $data['getPla'] = $this->Produk_model->getPla();
-            $this->load->view('sippko/pla', $data);
-        }
-
-        public function paper()
-        {
-            $data['getPaper'] = $this->Produk_model->getPaper();
-            $this->load->view('sippko/paper', $data);
+            $this->load->view('majoo/index2', $data);
         }
 
         public function register()
         {
-            $this->load->view('sippko/register');
+            $data['kategori'] =$this->Produk_model->get_kategori();
+            $this->load->view('majoo/register',$data);
         }
 
         public function kontak()
         {
-            $this->load->view('sippko/kontak');
+            $data['kategori'] =$this->Produk_model->get_kategori();
+            $this->load->view('majoo/kontak',$data);
         }
 
-        public function faq()
+
+        public function kategori($id_kategori)
         {
-            $this->load->view('sippko/faq');
-            
+            $produk = $this->Kategori_model->show($id_kategori);
+            $data ['nama_kategori'] = $produk->nama_kategori;
+            //var_dump($data ['data']->nama_kategori);
+            $data['produk_by'] = $this->Kategori_model->produk_by($id_kategori);
+            $data['kategori'] =$this->Produk_model->get_kategori();
+            $this->load->view('majoo/kategori', $data);
         }
 
-        public function profper()
-        {
-            $this->load->view('sippko/profper');
-            
-        }
 
-        public function vismis()
-        {
-            $this->load->view('sippko/vismis');
-            
-        }
-
-        public function history()
-        {
-            $this->load->view('sippko/historiorder');
-            
-        }
+        
 
         public function detail($id_produk)
         {
             $produk = $this->Produk_model->show($id_produk);
             $data = ['data' => $produk];
             $data['kategori'] = $this->Produk_model->get_kategori();
-            $this->load->view('sippko/detail', $data);
+            $this->load->view('majoo/detail', $data);
         }
     
-        public function basket($id_produk)
-        {
-            /*$produk = $this->Produk_model->show($id_produk);
-            $data = ['data' => $produk];
-            $data['kategori'] = $this->Produk_model->get_kategori();
-            $this->load->view('sippko/basket', $data);*/
-            $kategori  = $this->Produk_model->get_kategori();
-            $data = [
-                'list' => $this->Produk_model->list_product(),
-                'kategori' => $kategori];
-            $this->load->view('sippko/basket', $data);
-        }
+        
     }
     
     /* End of file Home.php */

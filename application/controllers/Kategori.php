@@ -21,34 +21,33 @@
         public function index()
         {
             $data['list'] = $this->Kategori_model->list_kategori();
-            $this->load->view('kategori/index', $data);
+            $this->load->view('Kategori/index', $data);
         }
         
         public function create()
         {
-            $this->load->view('kategori/create');
+            $this->load->view('Kategori/create');
         }
 
         public function store()
         {
-            $data = ['nama_kategori' => $this->input->post('nama_kategori')];
-            $rules = [
-                [
-                'field' => 'nama_kategori',
-                'label' => 'nama_kategori',
-                'rules' => 'trim|required'
-                ]
-            ];
-            
-            $this->form_validation->set_rules($rules);
 
-            if ($this->form_validation->run()) {
+            $this->form_validation->set_rules('nama_kategori', "Nama Kategori", "required|is_unique[kategori_produk.nama_kategori]");
+            $data = ['nama_kategori' => $this->input->post('nama_kategori')];
+
+            if ($this->form_validation->run()== true) {
                 $result = $this->Kategori_model->insert($data);
                 if ($result) {
-                    redirect('kategori');
+                    $this->session->set_flashdata("success_message", "Data Berhasil di Tambahkan");
+                    redirect('Kategori'); 
+                }else{
+                    $this->session->set_flashdata("error", "Data Gagal di Tambahkan");
+                    redirect(base_url("Kategori/create"));
+
                 }
             } else {
-                redirect('kategori/create');
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('Kategori/create');
             }
         }
 
@@ -58,7 +57,7 @@
             $data = [
                 'data' => $kategori_produk
             ];
-            $this->load->view('kategori/show', $data);
+            $this->load->view('Kategori/show', $data);
         }
 
         public function edit($id_kategori)
@@ -67,25 +66,46 @@
             $data = [
                 'data' => $kategori
             ];
-            $this->load->view('kategori/edit', $data);
+            $this->load->view('Kategori/edit', $data);
         }
     
         public function update($id_kategori)
         {
             // TODO: implementasi update data berdasarkan $id
             $id_kategori = $this->input->post('id_kategori');
+            $this->form_validation->set_rules('nama_kategori', "Nama Kategori", "required");
+            $data = ['nama_kategori' => $this->input->post('nama_kategori')];
+
+            if ($this->form_validation->run()== true) {
             $data = array(
                 'nama_kategori' => $this->input->post('nama_kategori')
             );
 
-            $this->Kategori_model->update($id_kategori, $data);
-            redirect('kategori');
+            $result = $this->Kategori_model->update($id_kategori, $data);
+                if (!$result) {
+                    $this->session->set_flashdata("success_message", "Data Berhasil di Perbaharui");
+                    redirect('Kategori'); 
+                }else{
+                    $this->session->set_flashdata("error", "Data Gagal di Perbaharui");
+                    redirect(base_url("Kategori/edit/".$id_kategori));
+
+                }
+            } else {
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('Kategori/edit/'.$id_kategori);
+            }
         }
     
         public function destroy($id_kategori)
         {
-            $this->Kategori_model->delete($id_kategori);
-            redirect('kategori');
+            $result=$this->Kategori_model->delete($id_kategori);
+            if(!$result)
+            {
+                $this->session->set_flashdata("success_message", "Data Berhasil di Hapus");
+            }else{
+                $this->session->set_flashdata("error", "Data Gagal di Hapus");
+            }
+            redirect('Kategori');
         }
     
     }

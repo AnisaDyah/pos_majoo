@@ -6,6 +6,13 @@
             <br/><br/><br/>
             <legend>Tambah User</legend>
             <div class="col-xs-12 col-sm-12 col-md-12">
+            <?php $error = $this->session->flashdata('error');
+							if ($error) { ?>
+								<div class="alert alert-danger alert-dismissable">
+									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+									<?php echo $error; ?>
+								</div>
+							<?php } ?>
             <?php echo form_open('pengguna/store'); ?>
 
               <div class="form-group">
