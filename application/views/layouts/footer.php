@@ -30,7 +30,17 @@
     <script src="<?php echo base_url('assets/js2/bootstrap-hover-dropdown.js')?>"></script>
     <script src="<?php echo base_url('assets/js2/owl.carousel.min.js')?>"></script>
     <script src="<?php echo base_url('assets/js2/front.js')?>"></script>
-
+    <script src="<?php echo base_url('assets/vendor/owlcarousel/dist/owl.carousel.min.js')?>"></script>
+<script>
+    $(document).ready(function(){
+  $(".owl-carousel").owlCarousel({
+    margin:20,
+    loop:true,
+    autoWidth:true,
+    items:4
+  });
+});
+    </script>
 
 </body>
 

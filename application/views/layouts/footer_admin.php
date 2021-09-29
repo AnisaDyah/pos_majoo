@@ -35,9 +35,67 @@
     <script src="<?php echo base_url('assets/vendors/jszip/dist/jszip.min.js')?>"></script>
     <script src="<?php echo base_url('assets/vendors/pdfmake/build/pdfmake.min.js')?>"></script>
     <script src="<?php echo base_url('assets/vendors/pdfmake/build/vfs_fonts.js')?>"></script>
+    <script src="<?php echo base_url('assets/vendors/summernote/summernote.js')?>"></script>  
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url('assets/build/js/custom.min.js')?>"></script>
+    <script>
+  $(document).ready(function() {
+    $('#mydata').select2();
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    if ($("#datatable-produk").length) {
+    $('#datatable-produk').DataTable( {
+        "paging":   false,
+        "ordering": false,
+        "info":     false,
+        responsive: true
+    } );
+  }
+} );
+</script>
+<script>
+$(function() {
+$('#itemName').select2({
+  placeholder: '--- Select Kategori ---',
+  ajax: {
+    url: '<?= base_url('Produk/getKategori') ?>',
+    type: "post",
+    dataType: 'json',
+    delay: 250,
+    data: function (params) {
+              return {
+                searchTerm: params.term // search term
+              };
+           },
+    processResults: function (response) {
+      return {
+        results: response
+      };
+    },
+    initSelection : function (element, callback) {
+        var data = {id: "id", text: "text"};
+        callback(data);
+    },
+    cache: true
+  }
+});
 
+})
+</script>
+<script>
+  $('#editordata').summernote({
+      height: 200,
+      toolbar: [    
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],       
+        
+      ],
+    });
+</script>
   </body>
 </html>

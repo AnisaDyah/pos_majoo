@@ -20,7 +20,7 @@
             <section id="produk">
                 <div class="container">
                 
-                    <div class="product-slider" style="width:1400px">
+                    <div class="product-slider">
                     <?php foreach ($list as $data => $value) { ?>
                         <div class="item" >
                             <div class="product" >

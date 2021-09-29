@@ -6,7 +6,14 @@
         <br/>
         <legend>Edit Produk</legend>
         <div class="col-xs-12 col-sm-12 col-md-12">
-        <?php echo form_open_multipart('produk/update/'.$data->id_produk); ?>
+        <?php $error = $this->session->flashdata('error');
+							if ($error) { ?>
+								<div class="alert alert-danger alert-dismissable">
+									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+									<?php echo $error; ?>
+								</div>
+							<?php } ?>
+        <?php echo form_open_multipart('Produk/update/'.$data->id_produk); ?>
           <?php echo form_hidden('id_produk', $data->id_produk) ?>
           <div class="form-group">
             <label for="nama_produk">Nama Produk</label>
@@ -19,47 +26,27 @@
             </div>
           <div class="form-group">
           <label> Kategori </label>
-                <select class="form-control" name ="kategori" id="kategori"> 
-                <option selected>
-                <?php
-                  foreach($kategori as $k) {
-                    $s='';
-                      if($k->id_kategori == $data->kategori)
-                      { $s='selected'; }
-                ?>
-                  <option value="<?php echo $data->kategori ?>" <?php echo $s ?>>
-                    <?php echo $k->nama_kategori ?>
-                  </option>
-                  <?php } ?>
-              </select>
+            <select id='itemName' class="form-control" name ="kategori">
+                <option value='<?php echo $data->id_kategori ?>' selected><?php echo $data->nama_kategori ?></option>
+            </select>
           </div>
           <div class="form-group">
             <label for="deskripsi">Deskripsi</label>
-            <input type="text" class="form-control" id="deskripsi" name="deskripsi" placeholder="Masukkan Deskripsi" rows="3"
-            value="<?php echo $data->deskripsi ?>">
+            <textarea class="form-control" rows="5" cols="9" id="editordata" name="deskripsi"><?php echo $data->deskripsi ?></textarea>
+            
           </div>
-          <!-- <div class="form-group">
-            <label for="komposisi">Komposisi</label>
-            <input type="text" class="form-control" id="komposisi" name="komposisi" placeholder="Masukkan Komposisi" rows="3"
-            value="<?php echo $data->komposisi ?>">
-          </div>
-          <div class="form-group">
-            <label for="indikasi">Indikasi</label>
-            <input type="text" class="form-control" id="indikasi" name="indikasi" placeholder="Masukkan Indikasi" rows="3"
-            value="<?php echo $data->indikasi ?>">
-          </div> -->
           <div class="form-group">
             <label for="stok">Stok</label>
-            <input type="text" class="form-control" id="stok" name="stok" placeholder="Masukkan Stok"
+            <input type="number" class="form-control" id="stok" name="stok" placeholder="Masukkan Stok"
             value="<?php echo $data->stok ?>">
           </div>
           <div class="form-group">
             <label for="harga">Harga</label>
-            <input type="text" class="form-control" id="harga" name="harga" placeholder="Masukkan Harga"
+            <input type="number" class="form-control" id="harga" name="harga" placeholder="Masukkan Harga"
             value="<?php echo $data->harga ?>">
           </div>
 
-          <a class="btn btn-info" href="<?php echo base_url('produk/') ?>">Kembali</a>
+          <a class="btn btn-info" href="<?php echo base_url('Produk/') ?>">Kembali</a>
           <button type="submit" class="btn btn-primary">OK</button>
         <?php echo form_close(); ?>
         </div>

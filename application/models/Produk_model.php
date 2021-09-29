@@ -7,62 +7,21 @@ class Produk_model extends CI_Model {
 
         public function list_product()
         {
+            $this->db->limit(5);
             $query = $this->db->get('produk');
             return $query->result();
         }
 
-        // public function getEtical()
-        // {
-        //     $query = $this->db->query('select*from produk where kategori=1');
-        //     return $query->result();
-        // }
-
-        // public function getGeneric()
-        // {
-        //     $query = $this->db->query('select*from produk where kategori=2');
-        //     return $query->result();
-        // }
-
-        // public function getLainnya()
-        // {
-        //     $query = $this->db->query('select*from produk where kategori=4');
-        //     return $query->result();
-        // }
-
-        public function getBag()
-        {
-            $query = $this->db->query('select*from produk where kategori=5');
-            return $query->result();
-        }
-
-        public function getStraw()
-        {
-            $query = $this->db->query('select*from produk where kategori=6');
-            return $query->result();
-        }
-
-        public function getContainer()
-        {
-            $query = $this->db->query('select*from produk where kategori=7');
-            return $query->result();
-        }
-
-        public function getPoncho()
-        {
-            $query = $this->db->query('select*from produk where kategori=8');
-            return $query->result();
-        }
-
-        public function getPla()
-        {
-            $query = $this->db->query('select*from produk where kategori=9');
-            return $query->result();
-        }
-
-        public function getPaper()
-        {
-            $query = $this->db->query('select*from produk where kategori=10');
-            return $query->result();
+        public function fetch_product($limit, $start) {
+            $this->db->limit($limit, $start);
+            $query = $this->db->get("produk");
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $data[] = $row;
+                }
+                return $data;
+            }
+            return false;
         }
 
         public function getTotal()
@@ -79,6 +38,8 @@ class Produk_model extends CI_Model {
 
         public function show($id_produk)
         {
+            $this->db->select('*');
+            $this->db->join('kategori_produk', 'kategori_produk.id_kategori = produk.kategori');
             $this->db->where('id_produk', $id_produk);
             $query = $this->db->get('produk');
             return $query->row();
@@ -103,6 +64,21 @@ class Produk_model extends CI_Model {
             $query = $this->db->get('kategori_produk');
             return $query->result();
         }
+
+        function getKategori($searchTerm){
+
+            $this->db->select('*');
+            $this->db->where("lower(nama_kategori) like '%".$searchTerm."%' ");
+            $fetched_records = $this->db->get('kategori_produk');
+            $kategori = $fetched_records->result_array();
+       
+            // Initialize Array with fetched data
+            $data = array();
+            foreach($kategori as $kat){
+               $data[] = array("id"=>$kat['id_kategori'], "text"=>$kat['nama_kategori']);
+            }
+            return $data;
+         }
 
 }
 

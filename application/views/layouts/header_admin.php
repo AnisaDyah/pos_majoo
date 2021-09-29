@@ -29,9 +29,13 @@ if($this->session->privilege != 'Administrator')
     <link href="<?php echo base_url('assets/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url('assets/vendors/summernote/summernote.css')?>" />
     <link rel="shortcut icon" href="<?php echo base_url() ?>assets/img/majoo_logo_small.png">
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url('assets/build/css/custom.min.css')?>" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link href="<?php echo base_url('assets/vendors/select2/dist/css/select2.min.css')?>" rel="stylesheet" />
+    <script src="<?php echo base_url('assets/vendors/select2/dist/js/select2.min.js')?>" defer></script>
   </head>
 
   <body class="nav-md">

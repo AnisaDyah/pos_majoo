@@ -25,6 +25,10 @@
     <link href="<?php echo base_url('assets/css2/animate.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css2/owl.carousel.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css2/owl.theme.css')?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/uk-section.css')?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/js/owl-carousel.js')?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/vendor/owlcarousel/dist/assets/owl.carousel.min.css')?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/vendor/owlcarousel/dist/assets/owl.theme.default.min.css')?>" rel="stylesheet">
 
     <!-- theme stylesheet -->
     <link href="<?php echo base_url('assets/css2/style.default.css')?>" rel="stylesheet" id="theme-stylesheet">
@@ -125,19 +129,21 @@
                     <?php
                         if($this->session->privilege == 'User')
                     { ?>
-                        <a class="btn btn-default navbar-toggle" href="<?php echo base_url() ?>cart/">
+                        <a class="btn btn-default navbar-toggle" href="#">
                         <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">Cart</span>
                         </a>
                     <?php }
                         else if($this->session->privilege == 'Administrator')
                     { ?>
-                        <a class="btn btn-default navbar-toggle" href="<?php echo base_url() ?>cart/">
+                        <a class="btn btn-default navbar-toggle" href="#/">
                         <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">Cart</span>
                         </a>
                     <?php }
                         else
                     { ?>
-                       
+                       <a class="btn btn-default navbar-toggle" href="#/">
+                        <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">Cart</span>
+                        </a>
                     <?php }
                     ?>
                        
