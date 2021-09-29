@@ -7,7 +7,7 @@ class Produk_model extends CI_Model {
 
         public function list_product()
         {
-            $this->db->limit(5);
+            $this->db->order_by('id_produk', 'ASC');
             $query = $this->db->get('produk');
             return $query->result();
         }
