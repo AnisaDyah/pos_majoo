@@ -40,9 +40,12 @@
                                 <h3 class="text-center"><a href="<?php echo base_url('home/detail/'.$value->id_produk) ?>" ><?php echo $value->nama_produk ?></a></h3>
                                 <!-- <h3><?php echo $value->nama_produk ?></a></h3> -->
                             <p class="price text-center"><b><?php echo "Rp " . number_format($value->harga,2,',','.') ?></b></p>
-                            <p class="text-justify text-limit"><?php echo $value->deskripsi ?></p>
-                            <a class="btn btn-default" style="margin-bottom:20px; margin-left:75px" href="#">
-                            <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">Beli</span>
+                            <p class="text-justify text-limit"><?php echo strip_tags($value->deskripsi) ?></p>
+                            <a class="btn btn-primary hidden-xs" style="margin-top:50px; margin-bottom:10px; margin-left:75px" href="#">
+                            <i class="fa fa-shopping-cart hidden-xs"></i>  <span class="hidden-xs">Beli</span>
+                            </a>
+                            <a class="btn btn-primary visible-xs" style="margin-top:30px; margin-left:130px; width:50;" href="#">
+                            <i class="fa fa-shopping-cart visible-xs"></i>
                             </a>
                         </div>
                     </div>

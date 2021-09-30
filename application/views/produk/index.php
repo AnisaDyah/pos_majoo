@@ -82,7 +82,7 @@
                           ?>
                         </td>
                         <td class="text-center">
-                        <p class="text-justify text-limit"><?php echo $value->deskripsi ?></p>
+                        <p class="text-justify text-limit"><?php echo strip_tags($value->deskripsi) ?></p>
                         </td>
                         <td class="text-center"><?php echo $value->stok ?></td>
                         <td><?php echo "Rp " . number_format($value->harga,2,',','.') ?></td>

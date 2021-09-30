@@ -22,8 +22,8 @@
 
         public function show($id_kategori)
         {
-            $this->db->select('*');
-            $this->db->join('produk', 'produk.kategori = kategori_produk.id_kategori');
+            // $this->db->select('*');
+            // $this->db->join('produk', 'produk.kategori = kategori_produk.id_kategori');
             $this->db->where('id_kategori', $id_kategori);
             $query = $this->db->get('kategori_produk');
             return $query->row();
